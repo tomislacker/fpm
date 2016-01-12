@@ -51,3 +51,21 @@ I don't know just yet.
 It will also require special setup.py invocations as Debian has patched distutils to
 install python packages, by default, to a place that requires again the
 python-central/support tools to run to make them work.
+
+# Docker Notes
+### Updating `Gemfile.lock`
+
+```sh
+docker run --rm \
+    -v "$PWD":/usr/src/app \
+    -w /usr/src/app \
+    ruby:2.0 bundle install
+```
+
+### Building Container
+*Prior to building the container, the previous step to generated a
+`Gemfile.lock` must be generated first.*
+
+```sh
+docker build -t jordansissel/fpm .
+```
