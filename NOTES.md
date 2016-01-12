@@ -69,3 +69,20 @@ docker run --rm \
 ```sh
 docker build -t jordansissel/fpm .
 ```
+
+### Using The Container
+Ideally one does not have to call `docker build ...` every time they desire to
+package their contents.  Here's a simple wrapper function that could be
+sourced by a facility like `~/.bashrc`:
+
+```sh
+fpm ()
+{
+    docker run \
+        -it \
+        --rm \
+        -v "$(pwd)":/src/$(dirname $(pwd)) \
+        -w /src \
+        jordansissel/fpm
+}
+```
